@@ -5,13 +5,9 @@
         "labels": ["feature"]
       },
       {
-        "title": "## :wrench: Fixes",
+        "title": "## 🐛 Fixes",
         "labels": ["fix"]
       },
-      {
-        "title": "## 🧪 Tests",
-        "labels": ["test"]
-      }
     ],
     "ignore_labels": [
       "ignore"
@@ -50,11 +46,7 @@
       "Owner/qa"
     ],
     "tag_resolver": {
-      "method": "semver",
-      "filter": {
-        "pattern": "api-(.+)",
-        "flags": "gu"
-      }
+      "method": "sort"
     },
     "base_branches": [
       "dev"

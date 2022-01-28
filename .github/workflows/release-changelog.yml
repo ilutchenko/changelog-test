@@ -13,7 +13,7 @@ jobs:
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v1
         with:
-          configuration: "release-changelog-configuration.json"
+          configuration: ".github/workflows/release-changelog-configuration.json"
           outputFile: "CHANGELOG.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
