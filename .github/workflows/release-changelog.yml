@@ -26,7 +26,6 @@ jobs:
         id: generate
         uses: mikepenz/release-changelog-builder-action@main
         with:
-          configuration: ".github/workflows/release-changelog-configuration.json"
           fromTag: ${{ steps.previous_tag.outputs.TAGNAME }}
           toTag: ${{ steps.current_tag.outputs.TAGNAME }}
         env:
@@ -38,7 +37,6 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           body: ${{steps.github_release.outputs.changelog}} 
-          commitMode: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create local changes
