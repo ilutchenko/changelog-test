@@ -36,12 +36,12 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
-          body: ${{steps.github_release.outputs.changelog}} 
+          body: ${{steps.generate.outputs.changelog}} 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create local changes
         run: |
-           echo ${{steps.github_release.outputs.changelog}} | cat - CHANGELOG.md > temp && mv temp CHANGELOG.md
+           echo ${{steps.generate.outputs.changelog}} | cat - CHANGELOG.md > temp && mv temp CHANGELOG.md
            git add CHANGELOG.md
       - name: Commit files
         run: |
