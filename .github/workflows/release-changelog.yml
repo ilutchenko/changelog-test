@@ -43,7 +43,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create local changes
         run: |
-           echo ${{steps.github_release.outputs.changelog}} >> CHANGELOG.md
+           echo ${{steps.github_release.outputs.changelog}} | cat - CHANGELOG.md > temp && mv temp CHANGELOG.md
            git add CHANGELOG.md
       - name: Commit files
         run: |
