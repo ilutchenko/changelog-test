@@ -12,17 +12,16 @@ jobs:
       - name: Get major of current tag and previous tag
         id: vars
         run: |
-          git fetch -a
-          echo ::set-output name=current_major::$(git tag --sort "-committerdate" | cut -d$'\n' -f1 | cut -d. -f1)
-          echo ::set-output name=previous_major::$(git tag --sort "-committerdate" | cut -d$'\n' -f2 | cut -d. -f1)
-          
+        git fetch -a
+        echo ::set-output name=current_major::$(git tag --sort "-committerdate" | cut -d$'\n' -f1 | cut -d. -f1)
+        echo ::set-output name=previous_major::$(git tag --sort "-committerdate" | cut -d$'\n' -f2 | cut -d. -f1)
+        
      - name: Build Changelog
         id: github_release
         uses: mikepenz/release-changelog-builder-action@v1
         with:
           configuration: ".github/workflows/release-changelog-configuration.json"
           fromTag: ${{ previous_major }}
-          outputFile: "./CHANGELOG.md"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -34,3 +33,17 @@ jobs:
           body: ${{steps.github_release.outputs.changelog}}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Create local changes
+          run: |
+          echo ${{steps.build_changelog.outputs.changelog}} >> CHANGELOG.md
+          git add CHANGELOG.md
+      - name: Commit files
+          run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -am "changelog: updated after release build"
+      - name: Push changes
+          uses: ad-m/github-push-action@master
+          with:
+            github_token: ${{ secrets.GITHUB_TOKEN }}
+            branch: ${{ github.ref }}
