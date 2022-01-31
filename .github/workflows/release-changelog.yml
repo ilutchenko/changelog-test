@@ -5,30 +5,30 @@ on:
       - '*'
 
 jobs:
-  analyze-tags: 
-    runs-on: ubuntu-latest
-    outputs:
-      previous-tag: ${{ steps.previoustag.outputs.name }}
-    steps:
-      - uses: actions/checkout@v2.4.0
-        with:
-          fetch-depth: 0
-      - name: Get previous tag
-        id: previoustag
-        run: echo "::set-output name=TAGNAME::$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))"
   release:
     if: startsWith(github.ref, 'refs/tags/')
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2.4.0
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          fetch-depth: 1  
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v1
+          fetch-depth: 0
+      - name: Get current tag name
+        id: current_tag
+        run: echo "::set-output name=TAGNAME::$(git describe --abbrev=0 --tags)"
+      - name: Get previous tag name
+        id: previous_tag
+        run: echo "::set-output name=TAGNAME::$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))"
+      - name: Get date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: Generate
+        id: generate
+        uses: mikepenz/release-changelog-builder-action@main
         with:
           configuration: ".github/workflows/release-changelog-configuration.json"
-          fromTag: "v0.0.alpha.2"
+          fromTag: ${{ steps.previous_tag.outputs.TAGNAME }}
+          toTag: ${{ steps.current_tag.outputs.TAGNAME }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

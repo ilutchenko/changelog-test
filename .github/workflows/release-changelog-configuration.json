@@ -7,7 +7,7 @@
       {
         "title": "## 🛠 Fixes",
         "labels": ["fix"]
-      },
+      }
     ],
     "ignore_labels": [
       "ignore"
