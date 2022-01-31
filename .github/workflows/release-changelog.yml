@@ -8,7 +8,7 @@ jobs:
   analyze-tags: 
     runs-on: ubuntu-latest
     outputs:
-      previous-tag: ${{ steps.previoustag.outputs.tag }}
+      previous-tag: ${{ steps.previoustag.outputs.name }}
     steps:
       - uses: actions/checkout@v2.4.0
         with:
@@ -28,7 +28,7 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v1
         with:
           configuration: ".github/workflows/release-changelog-configuration.json"
-          fromTag: ${{ needs.analyze-tags.outputs.previous-tag }}
+          fromTag: "v0.0.alpha.2"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -54,4 +54,4 @@ jobs:
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          branch: ${{ master }}
+          branch: "master"
