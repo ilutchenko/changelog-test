@@ -13,7 +13,8 @@
       "ignore"
     ],
     "sort": "ASC",
-    "pr_template": "- ${{TITLE}} [#${{NUMBER}}]",
+    "template": "#${{TO_TAG}} [Release ${{ steps.date.outputs.date }}]\n\n{{CHANGELOG}}\n",
+    "pr_template": "- ${{TITLE}} [#${{NUMBER}}](${{URL}})",
     "empty_template": "- no changes",
     "label_extractor": [
       {
