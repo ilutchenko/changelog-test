@@ -21,12 +21,12 @@ jobs:
         run: echo "::set-output name=TAGNAME::$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))"
       - name: Get date
         id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+        run: echo "::set-output name=date::$(date +'%d.%m.%Y')"
       - name: Generate
         id: generate
-        uses: mikepenz/release-changelog-builder-action@main
+        uses: mikepenz/release-changelog-builder-action@v2.9.0
         with:
-          configuration: ".github/workflows/release-changelog-configuration.json"
+          configuration: ".github/release-changelog-configuration.json"
           fromTag: ${{ steps.previous_tag.outputs.TAGNAME }}
           toTag: ${{ steps.current_tag.outputs.TAGNAME }}
         env:
@@ -44,14 +44,14 @@ jobs:
         run: |
            printf '%s\n%s\n' "${{steps.generate.outputs.changelog}}" "$(cat CHANGELOG.md)" > CHANGELOG.md
            printf '# %s [Release %s]\n\n%s' "${{ steps.current_tag.outputs.TAGNAME }}" "${{ steps.date.outputs.date }}" "$(cat CHANGELOG.md)" > CHANGELOG.md
-           git add CHANGELOG.md
       - name: Commit files
         run: |
-           git config --local user.email "github-actions[bot]@users.noreply.github.com"
-           git config --local user.name "github-actions[bot]"
-           git commit -am "changelog: updated after release build"
+           git add CHANGELOG.md
+           git config --local user.email "builderbot@emlid.com"
+           git config --local user.name "Builder Bot"
+           git commit -am "changelog: add release notes for a ${{ steps.current_tag.outputs.TAGNAME }} release"
       - name: Push changes
-        uses: ad-m/github-push-action@master
+        uses: ad-m/github-push-action@v0.6.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: "master"
