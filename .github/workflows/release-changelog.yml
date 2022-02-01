@@ -42,6 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create local changes
         run: |
+           printf '#%s [Release %s]\n\n' "${{ steps.current_tag.outputs.TAGNAME }}" "${{ steps.date.outputs.date }}"
            printf '%s\n%s\n' "${{steps.generate.outputs.changelog}}" "$(cat CHANGELOG.md)" > CHANGELOG.md
            git add CHANGELOG.md
       - name: Commit files
