@@ -42,7 +42,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Create local changes
         run: |
-           sed -i.old '1s;^;${{steps.generate.outputs.changelog}};' CHANGELOG.md
+           printf '%s\n%s\n' "${{steps.generate.outputs.changelog}}" "$(cat CHANGELOG.md)" > CHANGELOG.md
            git add CHANGELOG.md
       - name: Commit files
         run: |
