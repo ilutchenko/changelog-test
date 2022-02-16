@@ -1,3 +1,16 @@
+# v0.0.alpha.8 [Release 16.02.2022]
+
+## Features 💡
+
+- Test: feature label [#26](https://github.com/ilutchenko/changelog-test/pull/26)
+- Test: fix and feature labels [#27](https://github.com/ilutchenko/changelog-test/pull/27)
+
+## Bugfixes 🛠
+
+- Test: fix label [#25](https://github.com/ilutchenko/changelog-test/pull/25)
+- Test: fix and feature labels [#27](https://github.com/ilutchenko/changelog-test/pull/27)
+
+
 # v0.0.alpha.7 [Release 16.02.2022]
 
 ## 🚀 Features
