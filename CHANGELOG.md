@@ -1,3 +1,16 @@
+# v0.0.alpha.7 [Release 16.02.2022]
+
+## 🚀 Features
+
+- Test PR with feature label
+   - PR: #18
+
+## 🐛 Fixes
+
+- Test PR with fix label
+   - PR: #19
+
+
 # v0.0.alpha.7 [Release 2022-02-01]
 
 ## 🚀 Features
