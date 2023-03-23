@@ -1,6 +1,10 @@
 {
     "categories": [
       {
+        "title": "## User-visible 🗿",
+        "labels": ["user-visible"]
+      },
+      {
         "title": "## Features 💡",
         "labels": ["feature"]
       },
@@ -20,8 +24,6 @@
       "on_property": "title",
       "method": "match"
     },
-    "max_pull_requests": 200,
-    "max_back_track_time_days": 365,
     "base_branches": [
       "master"
     ]
