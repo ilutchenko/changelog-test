@@ -1,3 +1,20 @@
+# v1.5 [Release 24.03.2023]
+
+## User-visible 🗿
+
+- Feature [#31](https://github.com/ilutchenko/changelog-test/pull/31)
+- Fix [#30](https://github.com/ilutchenko/changelog-test/pull/30)
+
+## Features 💡
+
+- Invisible feature [#32](https://github.com/ilutchenko/changelog-test/pull/32)
+- Feature [#31](https://github.com/ilutchenko/changelog-test/pull/31)
+
+## Bugfixes 🛠
+
+- Fix [#30](https://github.com/ilutchenko/changelog-test/pull/30)
+
+
 # v1.4 [Release 24.03.2023]
 
 - no changes
