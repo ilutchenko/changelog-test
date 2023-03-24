@@ -15,7 +15,7 @@ jobs:
           fetch-depth: 0
       - name: Get current tag name
         id: current_tag
-        run: echo "::set-output name=TAGNAME::$(git describe --abbrev=0 --tags)"
+        run: echo "::set-output name=TAGNAME::${{github.ref_name}}"
       - name: Get previous tag name
         id: previous_tag
         run: echo "::set-output name=TAGNAME::$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))"
