@@ -1,3 +1,6 @@
+# v1.3 [Release 24.03.2023]
+
+- no changes
 # v0.0.alpha.8 [Release 16.02.2022]
 
 ## Features 💡
